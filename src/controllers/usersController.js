@@ -37,6 +37,15 @@ const router = {
         } catch (error) {
             res.status(404).json({ message: "Erro ao buscar usuário. Tente novamente!", error});
         }
+    },
+
+    updateUser: (req, res) => {
+        try {
+            const updatedUser = lista.updateUser(req.params.id, req.body);
+            res.status(200).json({ message: "Usuário atualizado com sucesso!", Usuário: updatedUser });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao atualizar usuário. Tente novamente!", error });
+        }
     }
 }
 
