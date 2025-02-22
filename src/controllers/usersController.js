@@ -28,6 +28,15 @@ const router = {
         } catch (error) {
             res.status(404).json({ message: "Erro ao buscar usuários. Tente novamente!", error });
         }
+    },
+
+    getUserById: (req, res) => {
+        try {
+            const user = lista.getUserById(req.params.id);
+            res.status(200).json({ message: "Usuário identificado com sucesso!", Usuário: user });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar usuário. Tente novamente!", error});
+        }
     }
 }
 
