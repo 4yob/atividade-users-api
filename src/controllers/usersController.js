@@ -46,7 +46,17 @@ const router = {
         } catch (error) {
             res.status(404).json({ message: "Erro ao atualizar usuário. Tente novamente!", error });
         }
+    },
+
+    deleteUser: (req, res) => {
+        try {
+            lista.deleteUser(req.params.id);
+            res.status(200).json({ message: "Usuário deletado com sucesso!" });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao deletar usuário. Tente novamente!", error });
+        }
     }
+    
 }
 
 module.exports = router
