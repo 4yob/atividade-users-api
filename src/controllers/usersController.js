@@ -19,6 +19,15 @@ const router = {
         } catch (error) {
             res.status(400).json({ message: error.message, error});
         }
+    },
+
+    getAllUsers: (req, res) => {
+        try {
+            const users = lista.getAllUsers();
+            res.status(200).json({ Usuários: users });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar usuários. Tente novamente!", error });
+        }
     }
 }
 
