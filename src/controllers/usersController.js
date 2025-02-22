@@ -17,7 +17,7 @@ const router = {
             lista.addUser(newUser);
             res.status(201).json({ message: "Usuário adicionado com sucesso! Seja bem-vindo!", newUser });
         } catch (error) {
-            res.status(400).json({ message: error.message, error});
+            res.status(400).json({ message: "Erro ao adicionar usuário. Tente novamente!", error});
         }
     },
 
