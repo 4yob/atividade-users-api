@@ -26,7 +26,7 @@ const router = {
 
     addPostByUserId: (req, res) => {
         try {
-            const { content } = req.body;
+            const { content, idUser } = req.body;
             if (!content) {
                 throw new Error("Digite algo para postar.");
             }
@@ -35,6 +35,15 @@ const router = {
             res.status(201).json({ message: "Post adicionado com sucesso!", newPost });
         } catch (error) {
             res.status(400).json({ message: "Erro ao adicionar post. Tente novamente!", error });
+        }
+    },
+
+    getPostByUserId: (req, res) => {
+        try {
+            const post = listaPosts.getPostByUserId(User.id);
+            res.status(200).json({ message: "Post identificado com sucesso!", Post: post });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar post. Tente novamente!", error });
         }
     }
 }
