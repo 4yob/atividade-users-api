@@ -11,6 +11,14 @@ class PostList {
     getAllPosts() {
         return this.posts;
     }
+
+    getPostById(id) {
+        const post = this.posts.find(post => post.id == id);
+        if (!post) {
+            throw new Error('Post não identificado.');
+        }
+        return post;
+    }
 }
 
 module.exports = PostList;

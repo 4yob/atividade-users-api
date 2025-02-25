@@ -15,6 +15,15 @@ const router = {
         }
     },
 
+    getPostById: (req, res) => {
+        try {
+            const post = listaPosts.getPostById(req.params.id);
+            res.status(200).json({ message: "Post identificado com sucesso!", Post: post });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar post. Tente novamente!", error });
+        }
+    },
+
     addPostByUserId: (req, res) => {
         try {
             const { content } = req.body;
