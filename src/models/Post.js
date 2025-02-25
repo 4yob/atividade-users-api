@@ -2,10 +2,10 @@ const { v4: uuid4 } = require("uuid");
 const User = require("./User");
 
 class Post {
-    constructor(author, content) {
+    constructor(content) {
         this.id = uuid4();
         this.UserId = User.id;
-        this.author = author;
+        this.author = User.name;
         this.content = content;
     }
 }
