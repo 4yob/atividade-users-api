@@ -6,6 +6,15 @@ const listaPosts = new PostList();
 
 const router = {
 
+    getAllPosts: (req, res) => {
+        try {
+            const posts = listaPosts.getAllPosts();
+            res.status(200).json({ Posts: posts });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar posts. Tente novamente!", error });
+        }
+    },
+
     addPostByUserId: (req, res) => {
         try {
             const { content } = req.body;

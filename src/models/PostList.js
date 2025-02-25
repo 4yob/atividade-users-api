@@ -7,6 +7,10 @@ class PostList {
         post.UserId = UserId;
         this.posts.push(post);
     }
+
+    getAllPosts() {
+        return this.posts;
+    }
 }
 
 module.exports = PostList;
