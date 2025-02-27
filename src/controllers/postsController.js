@@ -55,6 +55,15 @@ const router = {
             res.status(404).json({ message: "Erro ao atualizar post. Tente novamente!", error });
         }
     },
+
+    deletePost: (req, res) => {
+        try {
+            listaPosts.deletePost(req.params.id);
+            res.status(200).json({ message: "Post deletado com sucesso!" });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao deletar post. Tente novamente!", error });
+        }
+    }
 }
 
 module.exports = router;

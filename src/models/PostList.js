@@ -33,6 +33,10 @@ class PostList {
         Object.assign(post, updateData);
         return post;
     }
+
+    deletePost(id) {
+        this.posts = this.posts.filter(post => post.id != id);
+    }
 }
 
 module.exports = PostList;
