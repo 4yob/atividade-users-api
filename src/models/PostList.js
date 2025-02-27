@@ -27,6 +27,12 @@ class PostList {
         }
         return post;
     }
+
+    updatePost(id, updateData) {
+        const post = this.getPostById(id);
+        Object.assign(post, updateData);
+        return post;
+    }
 }
 
 module.exports = PostList;

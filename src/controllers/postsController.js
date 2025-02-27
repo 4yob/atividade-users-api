@@ -45,7 +45,16 @@ const router = {
         } catch (error) {
             res.status(404).json({ message: "Erro ao buscar post. Tente novamente!", error });
         }
-    }
+    },
+
+    updatePost: (req, res) => {
+        try {
+            const updatedPost = listaPosts.updatePost(req.params.id, req.body);
+            res.status(200).json({ message: "Post atualizado com sucesso!", Post: updatedPost });
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao atualizar post. Tente novamente!", error });
+        }
+    },
 }
 
 module.exports = router;
