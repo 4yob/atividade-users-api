@@ -1,62 +1,56 @@
-const User = require("../models/User");
-const UserList = require("../models/UserList");
+const userModel = require("../models/userModel");
 
-const listaUsuarios = new UserList();
-
-listaUsuarios.addUser(new User("Alejandra", "alejandra@gmail.com", 17));
-
-const router = {
-    
-    addUser: (req, res) => {
-        try {
-            const { name, email, age } = req.body;
-            if (!name || !email || !age) {
-                throw new Error("Por favor, preencha todos os campos.");
-            }
-            const newUser = new User(name, email, age);
-            listaUsuarios.addUser(newUser);
-            res.status(201).json({ message: "Usuário adicionado com sucesso! Seja bem-vindo!", newUser });
-        } catch (error) {
-            res.status(400).json({ message: "Erro ao adicionar usuário. Tente novamente!", error});
-        }
-    },
-
-    getAllUsers: (req, res) => {
-        try {
-            const users = listaUsuarios.getAllUsers();
-            res.status(200).json({ Usuários: users });
-        } catch (error) {
-            res.status(404).json({ message: "Erro ao buscar usuários. Tente novamente!", error });
-        }
-    },
-
-    getUserById: (req, res) => {
-        try {
-            const user = listaUsuarios.getUserById(req.params.id);
-            res.status(200).json({ message: "Usuário identificado com sucesso!", Usuário: user });
-        } catch (error) {
-            res.status(404).json({ message: "Erro ao buscar usuário. Tente novamente!", error});
-        }
-    },
-
-    updateUser: (req, res) => {
-        try {
-            const updatedUser = listaUsuarios.updateUser(req.params.id, req.body);
-            res.status(200).json({ message: "Usuário atualizado com sucesso!", Usuário: updatedUser });
-        } catch (error) {
-            res.status(404).json({ message: "Erro ao atualizar usuário. Tente novamente!", error });
-        }
-    },
-
-    deleteUser: (req, res) => {
-        try {
-            listaUsuarios.deleteUser(req.params.id);
-            res.status(200).json({ message: "Usuário deletado com sucesso!" });
-        } catch (error) {
-            res.status(404).json({ message: "Erro ao deletar usuário. Tente novamente!", error });
-        }
+const getUsers = async (req, res) => {
+    try {
+        const users = await userModel.getUsers();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar usuários." });
     }
-    
-}
+};
 
-module.exports = router
+const getUserById = async (req, res) => {
+    try {
+        const user = await userModel.getUserById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar usuário." });
+    }
+};
+
+const createUser = async (req, res) => {
+    try {
+        const { name, email } = req.body;
+        const newUser = await userModel.createUser(name, email);
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao criar usuário." });
+    }
+};
+
+const updateUser = async (req, res) => {
+    try {
+        const { name, email } = req.body;
+        const updatedUser = await userModel.updateUser(req.params.id, name, email);
+        if (!updatedUser) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar usuário." });
+    }
+};
+
+const deleteUser = async (req, res) => {
+    try {
+        const message = await userModel.deleteUser(req.params.id);
+        res.json(message);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar usuário." });
+    }
+};
+
+module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };
