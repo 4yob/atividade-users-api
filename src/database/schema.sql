@@ -14,9 +14,9 @@ INSERT INTO users (name, email) VALUES
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     user_name VARCHAR(100) NOT NULL,
+    user_id INTEGER REFERENCES users(id) ON DELETE SET NULL
     title VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
-    user_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
 
 INSERT INTO posts (title, content, user_id) VALUES
