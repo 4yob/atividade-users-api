@@ -11,6 +11,11 @@ INSERT INTO users (name, email) VALUES
     ('Enzo Turcovic', 'enzo@email.com'),
     ('Kevin Lima', 'kevin@email.com');
 
+INSERT INTO users (name, email) VALUES
+    ('Lilica Barros', 'lilica@email.com'),
+    ('Chico Barros', 'chico@email.com'),
+    ('Angel Barros', 'angel@email.com');
+
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
