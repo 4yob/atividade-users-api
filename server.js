@@ -4,10 +4,12 @@ const cors = require("cors");
 const usersRoutes = require("./src/routes/usersRoutes");
 const postsRoutes = require("./src/routes/postsRoutes");
 const reportRoutes = require("./src/routes/reportRoutes");
+const setupSwagger = require('./src/config/swagger');
 
 const app = express ();
 app.use(cors());
 app.use(express.json());
+setupSwagger(app);
 
 app.use("/api", usersRoutes);
 app.use("/api", postsRoutes);
