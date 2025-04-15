@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/usersController");
+const upload = require("../config/upload.js"); 
 
 
 /**
@@ -66,7 +67,7 @@ router.get("/users/:id", usersController.getUserById);
  *       201:
  *         description: Usuário adicionado com sucesso!
  */
-router.post("/users", usersController.createUser);
+router.post("/users", upload.single("photo"), usersController.createUser);
 
 
 /**
