@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/usersController");
 const upload = require("../config/upload.js"); 
+const apiKeyMiddleware = require("../config/apiKey.js");
 
-
+router.use(apiKeyMiddleware);
 /**
  * @swagger
  * tags:
